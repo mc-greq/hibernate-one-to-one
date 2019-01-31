@@ -18,20 +18,21 @@ public class GetInstructorDetailDemo {
 
         Session session = factory.getCurrentSession();
 
-        try(factory){
+        try(factory; session){
             session.beginTransaction();
 
             // get the instructor detail object
-            int id = 2;
+            int id = 211;
             InstructorDetail instructorDetail = session.get(InstructorDetail.class, id);
             System.out.println("Instructor detail: " + instructorDetail);
 
             // print the associated instructor
             System.out.println("the associated instructor: " + instructorDetail.getInstructor());
 
-
             session.getTransaction().commit();
             System.out.println("Done!");
+        }catch (Exception e){
+            e.printStackTrace();
         }
     }
 }
